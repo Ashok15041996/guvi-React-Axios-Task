@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import UserList from './components/UserList';
+import UserForm from './components/UserForm';
 
-function App() {
+const App = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+  };
+
+  const handleSave = () => {
+    setSelectedUser(null); // Clear selected user after save
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>User Management</h1>
+      <UserForm selectedUser={selectedUser} onSave={handleSave} />
+      <UserList onEdit={handleEdit} />
     </div>
   );
-}
+};
 
 export default App;
